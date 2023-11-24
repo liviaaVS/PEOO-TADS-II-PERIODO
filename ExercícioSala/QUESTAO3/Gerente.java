@@ -1,3 +1,4 @@
+package QUESTAO3;
 public class Gerente extends Funcionario {
     private String departamento =  "";
     private int nivel = 0;

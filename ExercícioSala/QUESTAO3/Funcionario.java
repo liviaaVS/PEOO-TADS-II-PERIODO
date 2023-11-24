@@ -1,3 +1,4 @@
+package QUESTAO3;
 public abstract class Funcionario {
     private String nome = "";
     private int id = 0;

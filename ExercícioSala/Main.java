@@ -3,14 +3,15 @@ import QUESTAO1.*;
 import QUESTAO2.QuartoLuxo;
 import QUESTAO2.QuartoSimples;
 import QUESTAO2.SuitePresidencial;
+import QUESTAO3.Gerente;
+import QUESTAO3.Programador;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner leia = new Scanner(System.in);
-        double value;
         System.out.println("Digite o raio do círculo: ");
-        value = leia.nextDouble();
+        double value = leia.nextDouble();
 
         Circulo c1 = new Circulo(value);
         c1.CalcularPerimetro();
