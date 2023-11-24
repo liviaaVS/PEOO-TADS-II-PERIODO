@@ -12,14 +12,14 @@ classDiagram
   }
 
   class Circulo {
-    -raio: double
+    +raio: double
     +CalcularArea(): double
     +CalcularPerimetro(): double
   }
 
   class Retangulo {
-    -base: double
-    -altura: double
+    +base: double
+    +altura: double
     +CalcularArea(): double
     +CalcularPerimetro(): double
   }
@@ -60,8 +60,8 @@ classDiagram
   }
 
   class Gerente {
-    -departamento: String
-    -nivel: int
+    +departamento: String
+    +nivel: int
     +calcularBonificacao(): double
     +calcularSalarioFinal(): double
     +toString(): String

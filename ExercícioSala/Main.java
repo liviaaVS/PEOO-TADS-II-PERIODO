@@ -1,10 +1,7 @@
 import java.util.Scanner;
 import QUESTAO1.*;
-import QUESTAO2.QuartoLuxo;
-import QUESTAO2.QuartoSimples;
-import QUESTAO2.SuitePresidencial;
-import QUESTAO3.Gerente;
-import QUESTAO3.Programador;
+import QUESTAO2.*;
+import QUESTAO3.*;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package QUESTAO3;
 public class Gerente extends Funcionario {
-    private String departamento =  "";
-    private int nivel = 0;
+    public String departamento =  "";
+    public int nivel = 0;
 
     public Gerente(String nome, int id, double salario, String departamento, int nivel){
         super(nome, id, salario);
