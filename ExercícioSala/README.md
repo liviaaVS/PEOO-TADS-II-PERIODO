@@ -13,7 +13,6 @@ classDiagram
 
   class Circulo {
     -raio: double
-    +Circulo(raio: double)
     +CalcularArea(): double
     +CalcularPerimetro(): double
   }
@@ -21,7 +20,6 @@ classDiagram
   class Retangulo {
     -base: double
     -altura: double
-    +Retangulo(base: double, altura: double)
     +CalcularArea(): double
     +CalcularPerimetro(): double
   }
@@ -56,19 +54,16 @@ classDiagram
     -nome: String
     -id: int
     -salario: double
-    +Funcionario(nome: String, id: int, salario: double)
     +calcularSalarioFinal(): double
   }
 
   class Gerente {
     -nivel: int
-    +Gerente(nome: String, id: int, salario: double, nivel: int)
     +calcularBonificacao(): double
   }
 
   class Programador {
     -linguagem: String
-    +Programador(nome: String, id: int, salario: double, linguagem: String)
     +calcularSalarioFinal(): double
   }
 
@@ -96,24 +91,21 @@ classDiagram
     -numero: int
     -capacidade: int
     -precoBase: double
-    +Quarto(numero: int, capacidade: int, precoBase: double)
     +calcularCustoReserva(): double
     +obterInformacoes(): String
   }
 
   class QuartoSimples {
-    +QuartoSimples(numero: int, capacidade: int, precoBase: double)
+    // Nenhuma alteração
   }
 
   class QuartoLuxo {
     -jacuzzi: boolean
-    +QuartoLuxo(numero: int, capacidade: int, precoBase: double, jacuzzi: boolean)
     +calcularCustoReserva(): double
   }
 
   class SuitePresidencial {
     -salaReuniao: boolean
-    +SuitePresidencial(numero: int, capacidade: int, precoBase: double, salaReuniao: boolean)
     +calcularCustoReserva(): double
   }
 
