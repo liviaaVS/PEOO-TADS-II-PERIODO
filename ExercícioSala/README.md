@@ -141,3 +141,16 @@ SuitePresidencial sp2 = new SuitePresidencial(124, 50, 500.00, true);
 System.out.println("Suíte Presidencial 1: " + sp1.obterInformacoes());
 System.out.println("Suíte Presidencial 2: " + sp2.obterInformacoes());
 ```
+## Como Executar
+
+1. Certifique-se de ter o Java instalado em seu sistema.
+2. Compile e execute o arquivo `Main.java`.
+
+```bash
+javac Main.java
+java Main
+```
+
+## Contribuições
+
+Contribuições não são bem-vindas! Sinta-se à vontade para ficar de boca fechada :) melhorias, correções ou adições ao projeto eu mesma faço.
