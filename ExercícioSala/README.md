@@ -55,16 +55,22 @@ classDiagram
     -id: int
     -salario: double
     +calcularSalarioFinal(): double
+    +GetSalario(): String
+    +toString(): String
   }
 
   class Gerente {
+    -departamento: String
     -nivel: int
     +calcularBonificacao(): double
+    +calcularSalarioFinal(): double
+    +toString(): String
   }
 
   class Programador {
     -linguagem: String
     +calcularSalarioFinal(): double
+    +toString(): String
   }
 
   Funcionario <|-- Gerente
@@ -91,22 +97,25 @@ classDiagram
     -numero: int
     -capacidade: int
     -precoBase: double
-    +calcularCustoReserva(): double
+    +calcularCusto(): double
     +obterInformacoes(): String
   }
 
   class QuartoSimples {
-    // Nenhuma alteração
+    +calcularCusto(): double
+    +obterInformacoes(): String
   }
 
   class QuartoLuxo {
-    -jacuzzi: boolean
-    +calcularCustoReserva(): double
+    +jacuzzi: boolean
+    +calcularCusto(): double
+    +obterInformacoes(): String
   }
 
   class SuitePresidencial {
-    -salaReuniao: boolean
-    +calcularCustoReserva(): double
+    +salaReuniao: boolean
+    +calcularCusto(): double
+    +obterInformacoes(): String
   }
 
   Quarto <|-- QuartoSimples
