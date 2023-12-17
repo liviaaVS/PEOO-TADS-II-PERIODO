@@ -4,7 +4,7 @@ import java.util.*;
 public class Disciplina {
 
     private String nomeDisciplina;
-    private List<Aluno> ListaAlunos;
+    private ArrayList<Aluno> ListaAlunos;
     private Professor Prof;
 
     /* ALUNOS POSSUEM NOTAS POR DISCIPLINA, UMA BOA OPÇÃO É CRIAR UM MAPEAMENTO ENTRE ALUNO E NOTA EM DISCIPLINAS */
@@ -17,6 +17,12 @@ public class Disciplina {
 
     public String getNomeDisciplina(){
         return this.nomeDisciplina;
+    }
+    public String getNomeProfessor(){
+        return this.Prof.getNomeProf();
+    }
+     public ArrayList<Aluno> getListaAlunos(){
+        return this.ListaAlunos;
     }
 
     public Disciplina(String nomeDisciplina, Professor prof) {

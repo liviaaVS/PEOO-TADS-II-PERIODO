@@ -147,7 +147,7 @@ public class SistemaEscolar{
     // ### Metodos relacionados as Disciplinas
 
 
-
+    
 
      
     public boolean CadastrarDisciplina(){
@@ -158,6 +158,18 @@ public class SistemaEscolar{
         return true;
     }
 
+    public void ListarDisciplinas(){
+        for(int x = 0; x< this.ListaDisciplinas.size(); x++){
+            Disciplina disc = ListaDisciplinas.get(x);
+            System.out.println( x +". " + disc.getNomeDisciplina());
+            System.out.println( "- Professor:  " + disc.getNomeProfessor());
+            ArrayList<Aluno> alunos =  disc.getListaAlunos();
+            for(int y = 0; y < alunos.size(); y++){
+                System.out.println( y + ". " + alunos.get(y).getNomeAluno());
+            }
+            
+        }
 
+    }
 
 }

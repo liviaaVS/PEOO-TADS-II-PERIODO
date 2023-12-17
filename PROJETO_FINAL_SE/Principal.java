@@ -8,7 +8,14 @@ public class Principal {
     SistemaEscolar se = new SistemaEscolar();
 
     Aluno aluno1 = new Aluno("Livia", 40029);
+    se.CadastrarAluno(aluno1);
+    Aluno aluno2 = new Aluno("Ryan", 45885);
+    se.CadastrarAluno(aluno1);
+    Aluno aluno3 = new Aluno("Outra pessoa", 7896);
+    se.CadastrarAluno(aluno1);
 
+
+    
     }
     public static void main(String[] args) {
             SistemaEscolar se = new SistemaEscolar();
