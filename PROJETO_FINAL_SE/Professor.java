@@ -7,6 +7,7 @@ public class Professor {
     public Professor(String nome, int id) {
         this.nome = nome;
         this.id = id;
+        this.disciplina = null;
     }
 
     public String getNomeProf(){
@@ -16,7 +17,7 @@ public class Professor {
         return this.id;
     }
     public Disciplina getDisciplina() {
-        return disciplina;
+        return this.disciplina;
     }
 
     public void setDisciplina(Disciplina disciplina) {

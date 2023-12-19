@@ -11,18 +11,31 @@ public class Disciplina {
     
     public Disciplina(String nomeDisciplina) {
         this.nomeDisciplina = nomeDisciplina;
-        this.ListaAlunos = new ArrayList<>();
+        this.ListaAlunos = new ArrayList<Aluno>();
+        this.Prof = null;
+
 
     }
 
     public String getNomeDisciplina(){
         return this.nomeDisciplina;
     }
-    public String getNomeProfessor(){
-        return this.Prof.getNomeProf();
+    public String getNomeProfessor() {
+        try {
+            return this.Prof.getNomeProf();
+        } catch (NullPointerException e) {
+            return "Ainda nao possui um professor responsável.";
+        }
     }
-     public ArrayList<Aluno> getListaAlunos(){
-        return this.ListaAlunos;
+    public ArrayList<Aluno> getListaAlunos() {
+        if (this.ListaAlunos.size() != 0) {
+            return this.ListaAlunos;
+        } else {
+            Aluno a = new Aluno("Esta disciplina ainda nao possui alunos.", 0);
+            ArrayList<Aluno> l = new ArrayList<Aluno>();
+            l.add(a);
+            return l;
+        }
     }
 
     public Disciplina(String nomeDisciplina, Professor prof) {

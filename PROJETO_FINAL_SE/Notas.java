@@ -32,14 +32,25 @@ public class Notas {
     public void setNota2(int nota2) {
         this.nota2 = nota2;
     }
+    public boolean aprovadoFinal(){ /* Metodo que verifica se o aluno foi aprovado com prova final */
+        return (((getNota1()*2 + getNota2()*3 + getNotaFinal()*3 / 5) + getNotaFinal())/2 < 6.0);
+    }
 
-    private boolean aprovado(){ /* Metodo que verifica se o aluno foi aprovado */
+    public boolean aprovado(){ /* Metodo que verifica se o aluno foi aprovado */
         if (getNota1()*2 + getNota2()*3 / 5 < 6.0){
             return false;
         }
         return true;
     }
-
+     public int getNotaFinal(){
+        if(!aprovado()){
+            return this.notaFinal;
+        }
+        else{
+            return 0;
+        }
+    }
+    
     public boolean setNotaFinal(int notaFinal){
         if(!aprovado()){
             this.notaFinal = notaFinal;
@@ -47,16 +58,6 @@ public class Notas {
         }
         else{
             return false;
-        }
-    }
-   
-
-    public int getNotaFinal(){
-        if(!aprovado()){
-            return this.notaFinal;
-        }
-        else{
-            return 0;
         }
     }
     

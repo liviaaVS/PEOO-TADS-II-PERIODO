@@ -24,6 +24,7 @@ public class Aluno{
         this.matricula = matricula;
         this.boletim = new ArrayList<>();
     }
+    
 
 
     public void ListarDisciplinas(){

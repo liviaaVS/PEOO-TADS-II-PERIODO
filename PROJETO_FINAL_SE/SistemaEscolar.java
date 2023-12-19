@@ -38,13 +38,9 @@ public class SistemaEscolar{
     // ###############################################################
     // ### Metodos relacionados aos alunos
 
-    public boolean findAluno(int matricula){
+    public int findAluno(int matricula){
         Aluno encontrado = ListaAlunos.stream().filter(a -> a.getMatriculaAluno() == matricula).findFirst().orElse(null);        
-        if(encontrado!= null){
-            return true;
-        }else{
-            return false;
-        }
+        return ListaAlunos.indexOf(encontrado);
     }
 
     public int findDisciplinaAluno(Aluno aluno, String disciplina) {
@@ -59,8 +55,8 @@ public class SistemaEscolar{
 
 
     public void CadastrarAluno(Aluno aluno){
-       boolean cadastrado = findAluno(aluno.getMatriculaAluno());
-       if(!cadastrado){
+       int cadastrado = findAluno(aluno.getMatriculaAluno());
+       if(cadastrado == -1){
             ListaAlunos.add(aluno);
             System.out.println("\nAluno cadastrado com sucesso!");
        }else{
@@ -69,8 +65,8 @@ public class SistemaEscolar{
 
     }
     public boolean DeletarAluno(Aluno aluno){
-        boolean cadastrado = findAluno(aluno.getMatriculaAluno());
-       if(cadastrado){
+        int cadastrado = findAluno(aluno.getMatriculaAluno());
+       if(cadastrado != -1){
             ListaAlunos.add(aluno);
             System.out.println("\nAluno deletado com sucesso!");
             return true;
@@ -90,6 +86,31 @@ public class SistemaEscolar{
             for(int y = 0; x< disciplina.size(); x++) 
             System.out.println(y + "." +  " " + disciplina.get(y).getDisciplina() + "\n");
         }
+
+    }
+    
+
+
+    public void AtribuirNotaAluno(Aluno aluno, Disciplina disciplina, int nota01, int nota02){
+        int indexa = findAluno(aluno.getMatriculaAluno());
+        int indexd = findDisciplinaAluno(aluno, disciplina.getNomeDisciplina());
+
+        if(indexa != -1 && indexd != -1){
+        ListaAlunos.get(indexa).getBotelim().get(indexd).setNota1(nota01);
+        ListaAlunos.get(indexa).getBotelim().get(indexd).setNota2(nota02);
+        if(!ListaAlunos.get(indexa).getBotelim().get(indexd).aprovado()){
+
+        System.out.println("Aluno não aprovado");
+
+        System.out.println("Digite nota da prova final: ");
+        ListaAlunos.get(indexa).getBotelim().get(indexd).setNotaFinal(leia.nextInt());
+
+        if(ListaAlunos.get(indexa).getBotelim().get(indexd).aprovadoFinal()) System.out.println("Aluno aprovado!");
+        else System.out.println("Aluno reprovado");
+        }
+
+    }
+
 
     }
 
@@ -117,6 +138,19 @@ public class SistemaEscolar{
 
     }
 
+
+    public void CadastrarProfessorDisciplina (int idProfessor, int idDisciplina){
+            Disciplina encontrado = ListaDisciplinas.stream().filter(disc -> disc.getNomeProfessor().toUpperCase().trim().equals(ListaProfessores.get(idProfessor).getNomeProf().toUpperCase().trim())).findFirst().orElse(null);
+
+            if(encontrado != null){
+                System.out.println("Professor já cadastrado na disciplina: " + 
+                encontrado.getNomeDisciplina());
+            }else{
+                ListaProfessores.get(idProfessor).setDisciplina(ListaDisciplinas.get(idDisciplina));
+            }
+    }
+
+
     public boolean DeletarProfessor(int idprof){
 
        int cadastrado = findProfessor(idprof);
@@ -135,8 +169,8 @@ public class SistemaEscolar{
         for(int x = 0; x< this.ListaProfessores.size(); x++){
             Professor prof = ListaProfessores.get(x);
             System.out.println("Id: " +  prof.getIdProf());
-            System.out.println("Id: " +  prof.getNomeProf());
-            System.out.println("Id: " +  prof.getDisciplina().getNomeDisciplina() +"\n ------------------");
+            System.out.println("Nome: " +  prof.getNomeProf());
+            System.out.println("Disciplina: " +  prof.getDisciplina().getNomeDisciplina() +"\n ------------------");
 
         }
 
@@ -147,27 +181,45 @@ public class SistemaEscolar{
     // ### Metodos relacionados as Disciplinas
 
 
-    
+     public int findDisciplina(String nomeDisc ){
+        Disciplina encontrado = ListaDisciplinas.stream().filter(disc -> disc.getNomeDisciplina().toUpperCase().trim().equals(nomeDisc.toUpperCase().trim())).findFirst().orElse(null);        
+        return ListaDisciplinas.indexOf(encontrado);
+    }
 
      
-    public boolean CadastrarDisciplina(){
-        return true;
+    public void CadastrarDisciplina(Disciplina disciplina){
+        int cadastrado = findDisciplina(disciplina.getNomeDisciplina());
+       if(cadastrado == -1){
+            ListaDisciplinas.add(disciplina);
+            System.out.println("\nDisciplina cadastrada com sucesso!");
+       }else{
+            System.out.println("\nNão foi possível cadastrar disciplina, pois ela já se encontra no sistema.");
+       }
     }
 
-    public boolean DeletarDisciplina(){
-        return true;
+    public void DeletarDisciplina(Disciplina disciplina){
+        int cadastrado = findDisciplina(disciplina.getNomeDisciplina());
+        if(cadastrado != -1){
+            this.ListaDisciplinas.remove(ListaDisciplinas.get(cadastrado));
+            System.out.println("\nDisciplina deletada com sucesso!");
+        }else{
+            System.out.println("\nDisciplina não existe!");
+        }
     }
 
-    public void ListarDisciplinas(){
-        for(int x = 0; x< this.ListaDisciplinas.size(); x++){
+    public void ListarDisciplinas() {
+        for (int x = 0; x < this.ListaDisciplinas.size(); x++) {
             Disciplina disc = ListaDisciplinas.get(x);
-            System.out.println( x +". " + disc.getNomeDisciplina());
-            System.out.println( "- Professor:  " + disc.getNomeProfessor());
-            ArrayList<Aluno> alunos =  disc.getListaAlunos();
-            for(int y = 0; y < alunos.size(); y++){
-                System.out.println( y + ". " + alunos.get(y).getNomeAluno());
-            }
+            System.out.println(x + ". Disciplina: " + disc.getNomeDisciplina());
             
+            System.out.println("- Professor: " + disc.getNomeProfessor());
+            System.out.println("------------------- ALUNOS ------------------- ");
+            ArrayList<Aluno> alunos = disc.getListaAlunos();
+            for (int y = 0; y < alunos.size(); y++) {
+                    System.out.println(y + " - " + alunos.get(y).getNomeAluno());
+            }
+            System.out.println("\n");
+
         }
 
     }
