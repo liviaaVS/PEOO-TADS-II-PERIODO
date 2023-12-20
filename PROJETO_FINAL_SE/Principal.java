@@ -34,11 +34,11 @@ public class Principal {
         Aluno aluno3 = new Aluno("Outra pessoa", 7896);
         se.CadastrarAluno(aluno3);
 
-        Professor prof1 = new Professor("Jorgiano", 1);
+        Professor prof1 = new Professor("Jorgiano");
         se.CadastrarProfessor(prof1);
-        Professor prof2 = new Professor("Lucena", 2);
+        Professor prof2 = new Professor("Lucena");
         se.CadastrarProfessor(prof2);
-        Professor prof3 = new Professor("Bráulio", 3);
+        Professor prof3 = new Professor("Bráulio");
         se.CadastrarProfessor(prof3);
 
     
@@ -90,15 +90,15 @@ public class Principal {
                             String nomedisc = leia.nextLine();
                             Disciplina disc = new Disciplina(nomedisc);
                             se.CadastrarDisciplina(disc);
+                            continuar();                          
                             break;
                         case 2:
                             System.out.println("|-------------- Cadastrar Professor");
                             System.out.println("Insira o nome do Professor: ");
                             String nomepro = leia.nextLine();
-                            System.out.println("Insira o id do Professor: ");
-                            int id = leia.nextInt();
-                            Professor prof = new Professor(nomepro, id);
+                            Professor prof = new Professor(nomepro);
                             se.CadastrarProfessor(prof);
+                            continuar();                          
                             break;
                         case 3:
                             System.out.println("|-------------- Cadastrar Aluno");
@@ -108,21 +108,43 @@ public class Principal {
                             int matricula = leia.nextInt();
                             Aluno alu = new Aluno(nomealu, matricula);
                             se.CadastrarAluno(alu);
+                            continuar();                          
                             break;
                         case 4:
                             System.out.println("|-------------- Cadastrar um Professor em uma disciplina");
+
                             se.ListarProfessores();
                             System.out.println("Insira o id do professor: ");
+                            int idprof =  leia.nextInt();
+
+                            System.out.println("__________________________________");
+
                             se.ListarDisciplinas();
                             System.out.println("Insira o nome da disciplina: ");
+                            int iddisc =  leia.nextInt();
+
+                            se.CadastrarProfessorDisciplina(idprof-1, iddisc);
+                            continuar();                          
                             break;
                         case 5:
                             System.out.println("|-------------- Cadastrar um Aluno em uma disciplina");
-                            // Add your logic for enrolling a student in a discipline here
+
+                            se.ListarAlunos();
+                            System.out.println("Insira o id do Aluno: ");
+                            int idAluno =  leia.nextInt();
+
+                            System.out.println("__________________________________");
+
+                            se.ListarDisciplinas();
+                            System.out.println("Insira o nome da disciplina: ");
+                            int iddisca =  leia.nextInt();
+
+                            se.CadastrarAlunoDisciplina(idAluno,iddisca);  
+                            continuar();                          
                             break;
                         case 6:
                             System.out.println("|-------------- Remover um Professor de uma disciplina");
-                            // Add your logic for removing a professor from a discipline here
+                            continuar();                          
                             break;
                         case 7:
                             System.out.println("|-------------- Vizualizar Professores\n");

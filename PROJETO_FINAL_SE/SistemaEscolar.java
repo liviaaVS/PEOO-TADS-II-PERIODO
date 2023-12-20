@@ -52,7 +52,22 @@ public class SistemaEscolar{
     
         return disciplinas.indexOf(encontrado);
     }
-
+    public void CadastrarAlunoDisciplina (int matricula, int idDisciplina){
+           
+            int  encontrado = findDisciplinaAluno(ListaAlunos.get(findAluno(matricula)), ListaDisciplinas.get(idDisciplina).getNomeDisciplina());
+            if(encontrado == -1){
+                if(idDisciplina < ListaDisciplinas.size()){
+                    ListaDisciplinas.get(idDisciplina).inserirAluno(ListaAlunos.get(findAluno(matricula))); // adiciona aluno na lista de alunos da disciplina
+                    Notas discipli = new Notas(ListaDisciplinas.get(idDisciplina).getNomeDisciplina(), ListaAlunos.get(findAluno(matricula)).getNomeAluno());
+                    ListaAlunos.get(findAluno(matricula)).setBoletim(discipli); // adiciona nome da disciplina noboletim do aluno
+                    System.out.println("Aluno: " + ListaAlunos.get(findAluno(matricula)).getNomeAluno() 
+                    + "Matriculado na disciplina: " +  discipli.getDisciplina());
+                }else{
+                    System.out.println("Essa disciplina não existe");
+                }
+            }else{
+            }
+    }
 
     public void CadastrarAluno(Aluno aluno){
        int cadastrado = findAluno(aluno.getMatriculaAluno());
@@ -79,12 +94,13 @@ public class SistemaEscolar{
     public void ListarAlunos(){
         for(int x = 0; x< this.ListaAlunos.size(); x++){
             Aluno aluno = ListaAlunos.get(x);
-            System.out.println("Matrícula: " +  aluno.getMatriculaAluno());
+            System.out.println("\nMatrícula: " +  aluno.getMatriculaAluno());
             System.out.println("Nome: " +  aluno.getNomeAluno());
             System.out.println("- Disciplinas: ");
             ArrayList<Notas> disciplina = aluno.getBotelim();
             for(int y = 0; x< disciplina.size(); x++) 
             System.out.println(y + "." +  " " + disciplina.get(y).getDisciplina() + "\n");
+
         }
 
     }
@@ -128,7 +144,9 @@ public class SistemaEscolar{
     public boolean CadastrarProfessor(Professor professor){
        int cadastrado = findProfessor(professor.getIdProf());
        if(cadastrado == -1){
+            professor.setid(ListaProfessores.size()+1);
             ListaProfessores.add(professor);
+
             System.out.println("\nProfessor cadastrado com sucesso!");
             return true;
        }else{
@@ -170,7 +188,7 @@ public class SistemaEscolar{
             Professor prof = ListaProfessores.get(x);
             System.out.println("Id: " +  prof.getIdProf());
             System.out.println("Nome: " +  prof.getNomeProf());
-            System.out.println("Disciplina: " +  prof.getDisciplina().getNomeDisciplina() +"\n ------------------");
+            System.out.println("Disciplina: " +  prof.getDisciplinaNome() +"\n ------------------");
 
         }
 

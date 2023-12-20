@@ -18,6 +18,9 @@ public class Aluno{
     public ArrayList<Notas> getBotelim(){
         return this.boletim;
     }
+    public void setBoletim(Notas disciplina) {
+        this.boletim.add(disciplina);
+    }
     
    public Aluno(String nome, int matricula) {
         this.nome = nome;
