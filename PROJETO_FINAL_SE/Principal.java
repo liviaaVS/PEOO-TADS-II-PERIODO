@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Principal {
     
     static Scanner leia = new Scanner(System.in);
-    static int opcao2, opcao;
+    static int opcao=-1;
     static SistemaEscolar se = new SistemaEscolar();
 
     public static void continuar(){
@@ -44,48 +44,34 @@ public class Principal {
     
     }
     public static void main(String[] args) {
-            basededados();
-        
-            System.out.println("### <link>Sistema Escolar</link> ###");
-            System.out.println("### Faça login como: ###");
-            System.out.println("1. Aluno  ");
-            System.out.println("2. Professor ");
-            System.out.println("3. Administrador ");
-            opcao =  leia.nextInt();
-
-            if(opcao == 1){
-                
-                System.out.println("SISTEMA ESCOLAR: Aluno");
-                System.out.println("\n1. Digite sua matrícula: ");
-               
-
-
-            }
-            if(opcao == 2){
-                
-                System.out.println("SISTEMA ESCOLAR: Professor");
-                System.out.println("\n1. Digite seu id: ");
-               
-
-            }
-            if(opcao == 3){
-                
+            basededados();                
                 do{
-                System.out.println("SISTEMA ESCOLAR: ADMINISTRAÇÃO");
-                System.out.println("\n1. Cadastrar Disciplina");
-                System.out.println("2. Cadastrar Professor");
-                System.out.println("3. Cadastrar Aluno");
-                System.out.println("4. Cadastrar um Professor em uma disciplina");
-                System.out.println("5. Cadastrar um Aluno de uma disciplina");
-                System.out.println("6. Remover um Professor o de uma disciplina");
-                System.out.println("7. Vizualizar Professores");
-                System.out.println("8. Vizualizar Alunos");
-                System.out.println("9. Vizualizar Disciplinas");
-                opcao2 =  leia.nextInt();
+                System.out.println("+-----------------------SISTEMA ESCOLAR: ADMINISTRAÇÃO--------------------+\n");
 
-                    switch(opcao2){
+                System.out.println("+-------------------------+---------------------+-------------------------+");
+                System.out.println("|          Sessão         |       Opção         |      Descrição          |");
+                System.out.println("+-------------------------+---------------------+-------------------------+");
+                System.out.println("|         Cadastrar       |         1           | Disciplina              |");
+                System.out.println("|         Cadastrar       |         4           | Professor em disciplina |");
+                System.out.println("|         Cadastrar       |         3           | Aluno                   |");
+                System.out.println("|         Cadastrar       |         4           | Professor em disciplina |");
+                System.out.println("|         Cadastrar       |         5           | Aluno em disciplina     |");
+                System.out.println("+-------------------------+---------------------+-------------------------+");
+                System.out.println("|          Remover        |         6           | Professor de disciplina |");
+                System.out.println("+-------------------------+---------------------+-------------------------+");
+                System.out.println("|        Visualizar       |         7           | Visualizar Professores  |");
+                System.out.println("|        Visualizar       |         8           | Visualizar Alunos       |");
+                System.out.println("|        Visualizar       |         9           | Visualizar Professores  |");
+                System.out.println("|        Visualizar       |         10          | Gerar Boletim           |");
+                System.out.println("+-------------------------+---------------------+-------------------------+");
+                System.out.println("|        Atribuição       |         11          | Atribuir Nota a Aluno   |");
+                System.out.println("+-------------------------+---------------------+-------------------------+");
+
+                                opcao =  leia.nextInt();
+
+                    switch(opcao){
                         case 1:
-                            System.out.println("|-------------- Cadastrar Disciplina");
+                            System.out.println("+-------------- Cadastrar Disciplina --------------+");
                             System.out.println("Insira o nome da Disciplina: ");
                             String nomedisc = leia.nextLine();
                             Disciplina disc = new Disciplina(nomedisc);
@@ -93,7 +79,7 @@ public class Principal {
                             continuar();                          
                             break;
                         case 2:
-                            System.out.println("|-------------- Cadastrar Professor");
+                            System.out.println("+-------------- Cadastrar Professor --------------+\n");
                             System.out.println("Insira o nome do Professor: ");
                             String nomepro = leia.nextLine();
                             Professor prof = new Professor(nomepro);
@@ -101,7 +87,7 @@ public class Principal {
                             continuar();                          
                             break;
                         case 3:
-                            System.out.println("|-------------- Cadastrar Aluno");
+                            System.out.println("+-------------- Cadastrar Aluno --------------+\n");
                             System.out.println("Insira o nome Aluno: ");
                             String nomealu = leia.nextLine();
                             System.out.println("Insira a matrícula: ");
@@ -111,7 +97,7 @@ public class Principal {
                             continuar();                          
                             break;
                         case 4:
-                            System.out.println("|-------------- Cadastrar um Professor em uma disciplina");
+                            System.out.println("+-------------- Cadastrar um Professor em uma disciplina --------------+");
 
                             se.ListarProfessores();
                             System.out.println("Insira o id do professor: ");
@@ -127,7 +113,7 @@ public class Principal {
                             continuar();                          
                             break;
                         case 5:
-                            System.out.println("|-------------- Cadastrar um Aluno em uma disciplina");
+                            System.out.println("+-------------- Cadastrar um Aluno em uma disciplina --------------+");
 
                             se.ListarAlunos();
                             System.out.println("Insira o id do Aluno: ");
@@ -143,31 +129,38 @@ public class Principal {
                             continuar();                          
                             break;
                         case 6:
-                            System.out.println("|-------------- Remover um Professor de uma disciplina");
+                            System.out.println("+-------------- Remover um Professor de uma disciplina --------------+");
                             continuar();                          
                             break;
                         case 7:
-                            System.out.println("|-------------- Vizualizar Professores\n");
-                            se.ListarProfessores();
+                            System.out.println("+-------------- Vizualizar Professores --------------+\n");                           
                             continuar();
                             break;
                         case 8:
-                            System.out.println("|-------------- Vizualizar Alunos\n");
+                            System.out.println("+-------------- Vizualizar Alunos --------------+\n");
                             se.ListarAlunos();
                             continuar();
                             break;  
 
                         case 9:
-                            System.out.println("Vizualizar Disciplinas\n");
+                            System.out.println("+-------------- Vizualizar Disciplinas --------------+\n");
+                            se.ListarDisciplinas();
+                            continuar();
+                            break; 
+                        case 10:
+                            System.out.println("+-------------- Gerar boletim  --------------+\n");
+                            se.ListarDisciplinas();
+                            continuar();
+                            break;
+                        case 11:
+                            System.out.println("+-------------- Vizualizar Disciplinas --------------+\n");
                             se.ListarDisciplinas();
                             continuar();
                             break; 
                     }
 
-                }while(opcao2 !=0);
+                }while(opcao !=0);
             }
-
-
-        }           
+         
 
 }

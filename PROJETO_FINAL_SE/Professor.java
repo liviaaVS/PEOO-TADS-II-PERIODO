@@ -10,7 +10,9 @@ public class Professor {
     }
 
 
-
+    public void removerDisciplina(){
+        this.disciplina = null;
+    }
     public String getNomeProf(){
         return this.nome;
     }

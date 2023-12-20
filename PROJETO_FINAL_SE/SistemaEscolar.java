@@ -30,8 +30,19 @@ public class SistemaEscolar{
         return true;
     }
 
-
-
+    public void GerarBoletim(int idAluno){
+        Aluno aluno = ListaAlunos.get(idAluno);
+        
+        System.out.println("+----------------------+-----------+----------------+-------+-------+--------------+");
+        System.out.println("|      Nome Aluno      | Matrícula |  Nota1 | Nota2 | Média Parcial | Média Final  |");
+        System.out.println("+----------------------+-----------+----------------+-------+-------+--------------+");
+        ArrayList<Notas> notas = aluno.getBotelim();
+        for(int x=0; x < notas.size();x++){
+        System.out.println("+----------------------+");
+        System.out.println("|      Disciplina      |        ->          " + notas.get(x).getDisciplina());
+        System.out.println("+----------------------+");
+        }
+    }
 
 
 
@@ -91,19 +102,24 @@ public class SistemaEscolar{
        }
     }
 
-    public void ListarAlunos(){
-        for(int x = 0; x< this.ListaAlunos.size(); x++){
+    public void ListarAlunos() {
+        System.out.println("Listagem de Alunos:\n");
+    
+        for (int x = 0; x < this.ListaAlunos.size(); x++) {
             Aluno aluno = ListaAlunos.get(x);
-            System.out.println("\nMatrícula: " +  aluno.getMatriculaAluno());
-            System.out.println("Nome: " +  aluno.getNomeAluno());
-            System.out.println("- Disciplinas: ");
-            ArrayList<Notas> disciplina = aluno.getBotelim();
-            for(int y = 0; x< disciplina.size(); x++) 
-            System.out.println(y + "." +  " " + disciplina.get(y).getDisciplina() + "\n");
-
+            System.out.println("Matrícula: " + aluno.getMatriculaAluno());
+            System.out.println("Nome: " + aluno.getNomeAluno());
+            
+            System.out.println("- Disciplinas:");
+            ArrayList<Notas> disciplinas = aluno.getBotelim();
+            for (int y = 0; y < disciplinas.size(); y++) {
+                System.out.println(y + ". " + disciplinas.get(y).getDisciplina());
+            }
+    
+            System.out.println(); // Linha em branco para separar os alunos
         }
-
     }
+    
     
 
 
@@ -165,6 +181,19 @@ public class SistemaEscolar{
                 encontrado.getNomeDisciplina());
             }else{
                 ListaProfessores.get(idProfessor).setDisciplina(ListaDisciplinas.get(idDisciplina));
+            }
+    }
+    public void RemoverProfessorDisciplina (int idProfessor, int idDisciplina){
+            Disciplina encontrado = ListaDisciplinas.stream().filter(disc -> disc.getNomeProfessor().toUpperCase().trim().equals(ListaProfessores.get(idProfessor).getNomeProf().toUpperCase().trim())).findFirst().orElse(null);
+
+            if(encontrado != null){
+                System.out.println("Professor já cadastrado na disciplina: " + 
+                encontrado.getNomeDisciplina());
+                ListaDisciplinas.get(idDisciplina).removerProfessor();
+                ListaProfessores.get(idProfessor).removerDisciplina();
+
+            }else{
+                System.out.println("Professor não está cadastrado nessa disciplina: "); 
             }
     }
 
