@@ -99,17 +99,7 @@ public class SistemaEscolar{
        }
 
     }
-    public boolean DeletarAluno(Aluno aluno){
-        int cadastrado = findAluno(aluno.getMatriculaAluno());
-       if(cadastrado != -1){
-            ListaAlunos.add(aluno);
-            System.out.println("\nAluno deletado com sucesso!");
-            return true;
-       }else{
-            System.out.println("\nAluno não existe no sistema.");
-            return false;
-       }
-    }
+   
     public List<Aluno> getListadeAlunos(){
         return this.ListaAlunos;
     }
@@ -243,20 +233,6 @@ public class SistemaEscolar{
             }
     }
 
-
-    public boolean DeletarProfessor(int idprof){
-
-       int cadastrado = findProfessor(idprof);
-       if(cadastrado != -1){
-            ListaProfessores.remove(ListaProfessores.get(cadastrado));
-            System.out.println("\nProfessor deletado com sucesso!");
-            return true;
-       }else{
-            System.out.println("\nNão foi possível deletar professor, pois ele já se encontra no sistema.");
-            return false;
-       }
-
-    }
 
     public void ListarProfessores(){
         for(int x = 0; x< this.ListaProfessores.size(); x++){
