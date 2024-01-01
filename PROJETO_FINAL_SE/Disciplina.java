@@ -20,6 +20,11 @@ public class Disciplina {
     public String getNomeDisciplina(){
         return this.nomeDisciplina;
     }
+
+    public Professor getProfessor(){
+        return this.Prof;
+    }
+
     public String getNomeProfessor() {
         try {
             return this.Prof.getNomeProf();

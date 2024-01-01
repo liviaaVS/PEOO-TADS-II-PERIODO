@@ -54,7 +54,7 @@ public class Principal {
                 System.out.println("|          Sessão         |       Opção         |      Descrição          |");
                 System.out.println("+-------------------------+---------------------+-------------------------+");
                 System.out.println("|         Cadastrar       |         1           | Disciplina              |");
-                System.out.println("|         Cadastrar       |         4           | Professor em disciplina |");
+                System.out.println("|         Cadastrar       |         2           | Professor               |");
                 System.out.println("|         Cadastrar       |         3           | Aluno                   |");
                 System.out.println("|         Cadastrar       |         4           | Professor em disciplina |");
                 System.out.println("|         Cadastrar       |         5           | Aluno em disciplina     |");
@@ -63,7 +63,7 @@ public class Principal {
                 System.out.println("+-------------------------+---------------------+-------------------------+");
                 System.out.println("|        Visualizar       |         7           | Visualizar Professores  |");
                 System.out.println("|        Visualizar       |         8           | Visualizar Alunos       |");
-                System.out.println("|        Visualizar       |         9           | Visualizar Professores  |");
+                System.out.println("|        Visualizar       |         9           | Visualizar Disciplinas  |");
                 System.out.println("|        Visualizar       |         10          | Gerar Boletim           |");
                 System.out.println("+-------------------------+---------------------+-------------------------+");
                 System.out.println("|        Atribuição       |         11          | Atribuir Nota a Aluno   |");
@@ -74,15 +74,17 @@ public class Principal {
                     switch(opcao){
                         case 1:
                             System.out.println("+-------------- Cadastrar Disciplina --------------+");
-                            System.out.println("Insira o nome da Disciplina: ");
+                            leia.nextLine(); // Consumir o caractere de nova linha restante no buffer
+                            System.out.print("Insira o nome da Disciplina: ");
                             String nomedisc = leia.nextLine();
                             Disciplina disc = new Disciplina(nomedisc);
                             se.CadastrarDisciplina(disc);
-                            continuar();                          
+                            continuar();
                             break;
                         case 2:
                             System.out.println("+-------------- Cadastrar Professor --------------+\n");
-                            System.out.println("Insira o nome do Professor: ");
+                            leia.nextLine(); // Consumir o caractere de nova linha restante no buffer
+                            System.out.print("Insira o nome do Professor: ");
                             String nomepro = leia.nextLine();
                             Professor prof = new Professor(nomepro);
                             se.CadastrarProfessor(prof);
@@ -90,25 +92,27 @@ public class Principal {
                             break;
                         case 3:
                             System.out.println("+-------------- Cadastrar Aluno --------------+\n");
-                            System.out.println("Insira o nome Aluno: ");
+                            leia.nextLine(); // Consumir o caractere de nova linha restante no buffer
+                            System.out.print("Insira o nome Aluno: ");
                             String nomealu = leia.nextLine();
-                            System.out.println("Insira a matrícula: ");
-                            int matricula = leia.nextInt();
+                            System.out.print("Insira a matrícula: ");
+                            String inputMatricula = leia.nextLine();
+                            int matricula = Integer.parseInt(inputMatricula);
                             Aluno alu = new Aluno(nomealu, matricula);
                             se.CadastrarAluno(alu);
-                            continuar();                          
-                            break;
+                            continuar();
+                            break;                        
                         case 4:
                             System.out.println("+-------------- Cadastrar um Professor em uma disciplina --------------+");
 
                             se.ListarProfessores();
-                            System.out.println("Insira o id do professor: ");
+                            System.out.print("Insira o id do professor: ");
                             int idprof =  leia.nextInt();
 
-                            System.out.println("__________________________________");
+                            System.out.print("__________________________________");
 
                             se.ListarDisciplinas();
-                            System.out.println("Insira o nome da disciplina: ");
+                            System.out.print("Insira o id da disciplina: ");
                             int iddisc =  leia.nextInt();
 
                             se.CadastrarProfessorDisciplina(idprof-1, iddisc-1);
@@ -118,24 +122,29 @@ public class Principal {
                             System.out.println("+-------------- Cadastrar um Aluno em uma disciplina --------------+");
 
                             se.ListarAlunos();
-                            System.out.println("Insira a matrícula do aluno: ");
+                            System.out.print("Insira a matrícula do aluno: ");
                             int idAluno =  leia.nextInt();
 
                             System.out.println("__________________________________");
 
                             se.ListarDisciplinas();
-                            System.out.println("Insira o id da disciplina: ");
+                            System.out.print("Insira o id da disciplina: ");
                             int iddisca =  leia.nextInt();
 
                             se.CadastrarAlunoDisciplina(idAluno,iddisca-1);  
                             continuar();                          
                             break;
                         case 6:
-                            System.out.println("+-------------- Remover um Professor de uma disciplina --------------+");
+                            System.out.print("+-------------- Remover um Professor de uma disciplina --------------+");
+                            se.ListarDisciplinas();
+                            System.out.print("Insira o id da disciplina: ");
+                            iddisc = leia.nextInt();
+                            se.RemoverProfessorDisciplina(iddisc-1);
                             continuar();                          
                             break;
                         case 7:
                             System.out.println("+-------------- Vizualizar Professores --------------+\n");                           
+                            se.ListarProfessores();
                             continuar();
                             break;
                         case 8:
@@ -152,7 +161,7 @@ public class Principal {
                         case 10:
                             System.out.println("+-------------- Gerar boletim  --------------+\n");
                             se.ListarAlunos();
-                            System.out.println("Insira a Matrícula do Aluno.");
+                            System.out.print("Insira a Matrícula do Aluno.");
                             int mat =  leia.nextInt();
                             se.GerarBoletim(mat);
                             continuar();
@@ -160,22 +169,24 @@ public class Principal {
                         case 11:
                             System.out.println("+-------------- Atribuir Nota  --------------+\n");
                             se.ListarAlunos();
-                            System.out.println("Escolha o Aluno por id: ");
+                            System.out.print("Escolha o Aluno por id: ");
                             int id_aluno = leia.nextInt();
                             System.out.println("Lista de disciplinas do Aluno:  " + se.getListadeAlunos().get(id_aluno-1).getNomeAluno());
                             System.out.println("______________________________________________\n");
+                            if(se.getListadeAlunos().get(id_aluno-1).getBotelim().size() != 0){
                             se.ListarDisciplinasAluno(id_aluno-1);
-                            System.out.println("Digite o id da disciplina: ");
+
+                            System.out.print("Digite o id da disciplina: ");
                             int disciplina = leia.nextInt();
                             leia.nextLine();
                             System.out.println("Disciplina selecionada!");
-                            System.out.println("Insira nota 01: ");
+                            System.out.print("Insira nota 01: ");
                             int nota01 = leia.nextInt();
-                            System.out.println("Insira nota 02: ");
+                            System.out.print("Insira nota 02: ");
                             int nota02 = leia.nextInt();
-
+                            System.out.println();
                             se.AtribuirNotaAluno(id_aluno-1, disciplina, nota01, nota02);
-
+                            }else System.out.println("Esse aluno ainda não possui disciplinas.\n");
                             continuar();
                             break; 
                     }

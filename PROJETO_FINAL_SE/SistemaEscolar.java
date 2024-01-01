@@ -30,9 +30,9 @@ public class SistemaEscolar{
         int idAluno = findAluno(matricula);
         Aluno aluno = ListaAlunos.get(idAluno);
     
-        System.out.println("+----------------------+-----------------------------------------------------------+");
-        System.out.println("|      Nome Aluno:       |      ->     " + aluno.getNomeAluno() + "|  Matrícula:     ->   " +  aluno.getMatriculaAluno());
-        System.out.println("+----------------------+---------------------------+----------------+--------------+");
+        System.out.println("+-----------------------------------------+----------------------------------------+");
+        System.out.println("|      Nome Aluno:       ->     " + aluno.getNomeAluno() + "      |      Matrícula:     ->   " +  aluno.getMatriculaAluno());
+        System.out.println("+-----------------------------------------+----------------------------------------+");
     
         ArrayList<Notas> notas = aluno.getBotelim();
     
@@ -41,10 +41,12 @@ public class SistemaEscolar{
             System.out.println("|      Disciplina      |       ->         " + notas.get(x).getDisciplina());
             System.out.println("+--------------------+---------------------------------------------------------+");
             System.out.println("| Nota 01: " + notas.get(x).getNota1() + "   Nota 02: " + notas.get(x).getNota2());
-            System.out.println("| Nota Final: " + notas.get(x).getNotaFinal());
-            System.out.println("| Média Final: " + notas.get(x).getMediaFinal());
+            if(!notas.get(x).aprovado()){
+                System.out.println("| Nota Final: " + notas.get(x).getNotaFinal());
+                System.out.println("| Média Final: " + notas.get(x).getMediaFinal());
+            }
             System.out.println("| Média Simples: " + notas.get(x).getMediaSimples());
-            System.out.println("+------------------------------------------------------------------------------+");
+            System.out.println("+-------------------------------------------------------------------------------+");
             System.out.println();
 
         }
@@ -71,20 +73,20 @@ public class SistemaEscolar{
     }
 
     public void CadastrarAlunoDisciplina (int matricula, int idDisciplina){
-           
+           try{
             int  encontrado = findDisciplinaAluno(ListaAlunos.get(findAluno(matricula)), ListaDisciplinas.get(idDisciplina).getNomeDisciplina());
             if(encontrado == -1){
-                if(idDisciplina < ListaDisciplinas.size()){
                     ListaDisciplinas.get(idDisciplina).inserirAluno(ListaAlunos.get(findAluno(matricula))); // adiciona aluno na lista de alunos da disciplina
                     Notas discipli = new Notas(ListaDisciplinas.get(idDisciplina).getNomeDisciplina(), ListaAlunos.get(findAluno(matricula)).getNomeAluno());
                     ListaAlunos.get(findAluno(matricula)).setBoletim(discipli); // adiciona nome da disciplina noboletim do aluno
                     System.out.println("Aluno: " + ListaAlunos.get(findAluno(matricula)).getNomeAluno() 
                     + " Matriculado na disciplina: " +  discipli.getDisciplina());
-                }else{
-                    System.out.println("Essa disciplina não existe");
-                }
             }else{
+                System.out.println("Aluno já matriculado na disciplina");
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Matrícula ou indice da disciplina inválidos");
+        }
     }
 
     public void CadastrarAluno(Aluno aluno){
@@ -191,27 +193,53 @@ public class SistemaEscolar{
     }
 
 
-    public void CadastrarProfessorDisciplina (int idProfessor, int idDisciplina){
-            Disciplina encontrado = ListaDisciplinas.stream().filter(disc -> disc.getNomeProfessor().toUpperCase().trim().equals(ListaProfessores.get(idProfessor).getNomeProf().toUpperCase().trim())).findFirst().orElse(null);
-
-            if(encontrado != null){
-                System.out.println("Professor já cadastrado na disciplina: " + 
-                encontrado.getNomeDisciplina());
-            }else{
-                ListaProfessores.get(idProfessor).setDisciplina(ListaDisciplinas.get(idDisciplina));
-            }
+    public void CadastrarProfessorDisciplina(int idProfessor, int idDisciplina) {
+        try{
+        Disciplina encontrado = ListaDisciplinas.stream()
+                .filter(disc -> disc.getNomeProfessor().equalsIgnoreCase(ListaProfessores.get(idProfessor).getNomeProf().trim()))
+                .findFirst()
+                .orElse(null);
+    
+        if (encontrado != null) {
+            System.out.println("Professor já cadastrado na disciplina: " + encontrado.getNomeDisciplina());
+        } else {
+            if(ListaProfessores.get(idProfessor).getDisciplina() == null){
+                if(ListaDisciplinas.get(idDisciplina).getNomeProfessor().equals("Ainda nao possui um professor responsável.")){
+                    ListaProfessores.get(idProfessor).setDisciplina(ListaDisciplinas.get(idDisciplina));
+                    ListaDisciplinas.get(idDisciplina).inserirProfessor(ListaProfessores.get(idProfessor));
+                    System.out.println("Cadastrado com sucesso!");
+                }
+                else{
+                    System.out.println("Disciplina já possui um professor responsável.");
+                }
+        }else{
+            System.out.println("O professor já possui uma matéria, para cadastrá-lo em uma nova disciplina remova a anterior.");
+        } 
+        }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Indices inválidos.");
+        }
     }
-    public void RemoverProfessorDisciplina (int idProfessor, int idDisciplina){
-            Disciplina encontrado = ListaDisciplinas.stream().filter(disc -> disc.getNomeProfessor().toUpperCase().trim().equals(ListaProfessores.get(idProfessor).getNomeProf().toUpperCase().trim())).findFirst().orElse(null);
+    
+    public void RemoverProfessorDisciplina (int idDisciplina){
+            Disciplina encontrado  = ListaDisciplinas.get(idDisciplina);
 
-            if(encontrado != null){
-                System.out.println("Professor já cadastrado na disciplina: " + 
-                encontrado.getNomeDisciplina());
+            if(encontrado.getProfessor() != null){
+            
+                int index = ListaProfessores.indexOf(
+                    ListaProfessores.stream()
+                        .filter(p -> p.getNomeProf().toUpperCase().trim().equals(encontrado.getNomeProfessor().toUpperCase().trim()))
+                        .findFirst()
+                        .orElse(null)
+                );
+                
                 ListaDisciplinas.get(idDisciplina).removerProfessor();
-                ListaProfessores.get(idProfessor).removerDisciplina();
-
+                ListaProfessores.get(index).removerDisciplina();
+                System.out.println("Professor removido com sucesso na disciplina: " + 
+                encontrado.getNomeDisciplina());
             }else{
-                System.out.println("Professor não está cadastrado nessa disciplina: "); 
+                System.out.println("Não há professor cadastrado na disciplina: " + encontrado.getNomeDisciplina()); 
+                
             }
     }
 
@@ -253,6 +281,9 @@ public class SistemaEscolar{
 
      
     public void CadastrarDisciplina(Disciplina disciplina){
+
+            
+        
         int cadastrado = findDisciplina(disciplina.getNomeDisciplina());
        if(cadastrado == -1){
             ListaDisciplinas.add(disciplina);
