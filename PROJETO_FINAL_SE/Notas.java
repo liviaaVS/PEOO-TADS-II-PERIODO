@@ -9,6 +9,19 @@ public class Notas {
     public Notas(String disciplina, String nomeAluno) {
         this.disciplina = disciplina;
         this.nomeAluno = nomeAluno;
+        this.nota1 = 0;
+        this.nota2 = 0;
+        this.notaFinal = 0;
+    }
+
+
+
+    public int getMediaSimples(){
+        return ((this.nota1 * 2) + (this.nota2 * 3)) / 5;
+    }
+
+    public int getMediaFinal(){
+        return (getMediaSimples() +  getNotaFinal()) / 2;
     }
 
     public String getNomeAluno() {
@@ -22,7 +35,7 @@ public class Notas {
     public int getNota1() {
         return nota1;
     }
-    public void setNota1(int nota1) {
+    public void setNota1(int nota1){
         this.nota1 = nota1;
     }
 
@@ -32,16 +45,14 @@ public class Notas {
     public void setNota2(int nota2) {
         this.nota2 = nota2;
     }
-    public boolean aprovadoFinal(){ /* Metodo que verifica se o aluno foi aprovado com prova final */
-        return (((getNota1()*2 + getNota2()*3 + getNotaFinal()*3 / 5) + getNotaFinal())/2 < 6.0);
+    public boolean aprovadoFinal() {
+        return getMediaFinal() > 60.0;
     }
-
-    public boolean aprovado(){ /* Metodo que verifica se o aluno foi aprovado */
-        if (getNota1()*2 + getNota2()*3 / 5 < 6.0){
-            return false;
-        }
-        return true;
+    
+    public boolean aprovado() {
+        return  getMediaSimples() > 60.0;
     }
+    
      public int getNotaFinal(){
         if(!aprovado()){
             return this.notaFinal;

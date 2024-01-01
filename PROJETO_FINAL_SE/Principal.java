@@ -41,6 +41,8 @@ public class Principal {
         Professor prof3 = new Professor("Bráulio");
         se.CadastrarProfessor(prof3);
 
+        se.CadastrarAlunoDisciplina(7896,2);
+
     
     }
     public static void main(String[] args) {
@@ -109,23 +111,23 @@ public class Principal {
                             System.out.println("Insira o nome da disciplina: ");
                             int iddisc =  leia.nextInt();
 
-                            se.CadastrarProfessorDisciplina(idprof-1, iddisc);
+                            se.CadastrarProfessorDisciplina(idprof-1, iddisc-1);
                             continuar();                          
                             break;
                         case 5:
                             System.out.println("+-------------- Cadastrar um Aluno em uma disciplina --------------+");
 
                             se.ListarAlunos();
-                            System.out.println("Insira o id do Aluno: ");
+                            System.out.println("Insira a matrícula do aluno: ");
                             int idAluno =  leia.nextInt();
 
                             System.out.println("__________________________________");
 
                             se.ListarDisciplinas();
-                            System.out.println("Insira o nome da disciplina: ");
+                            System.out.println("Insira o id da disciplina: ");
                             int iddisca =  leia.nextInt();
 
-                            se.CadastrarAlunoDisciplina(idAluno,iddisca);  
+                            se.CadastrarAlunoDisciplina(idAluno,iddisca-1);  
                             continuar();                          
                             break;
                         case 6:
@@ -149,12 +151,31 @@ public class Principal {
                             break; 
                         case 10:
                             System.out.println("+-------------- Gerar boletim  --------------+\n");
-                            se.ListarDisciplinas();
+                            se.ListarAlunos();
+                            System.out.println("Insira a Matrícula do Aluno.");
+                            int mat =  leia.nextInt();
+                            se.GerarBoletim(mat);
                             continuar();
                             break;
                         case 11:
-                            System.out.println("+-------------- Vizualizar Disciplinas --------------+\n");
-                            se.ListarDisciplinas();
+                            System.out.println("+-------------- Atribuir Nota  --------------+\n");
+                            se.ListarAlunos();
+                            System.out.println("Escolha o Aluno por id: ");
+                            int id_aluno = leia.nextInt();
+                            System.out.println("Lista de disciplinas do Aluno:  " + se.getListadeAlunos().get(id_aluno-1).getNomeAluno());
+                            System.out.println("______________________________________________\n");
+                            se.ListarDisciplinasAluno(id_aluno-1);
+                            System.out.println("Digite o id da disciplina: ");
+                            int disciplina = leia.nextInt();
+                            leia.nextLine();
+                            System.out.println("Disciplina selecionada!");
+                            System.out.println("Insira nota 01: ");
+                            int nota01 = leia.nextInt();
+                            System.out.println("Insira nota 02: ");
+                            int nota02 = leia.nextInt();
+
+                            se.AtribuirNotaAluno(id_aluno-1, disciplina, nota01, nota02);
+
                             continuar();
                             break; 
                     }
