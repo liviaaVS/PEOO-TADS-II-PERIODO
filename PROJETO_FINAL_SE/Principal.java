@@ -20,18 +20,20 @@ public class Principal {
 
     public static void basededados(){
 
-        Disciplina disc1 = new Disciplina("Algoritmos");
+        Disciplina disc1 = new Disciplina("Algoritmos"); /* id 0 */
         se.CadastrarDisciplina(disc1);
-        Disciplina disc2 = new Disciplina("PEOO");
+        Disciplina disc2 = new Disciplina("POO"); /* id 1 */
         se.CadastrarDisciplina(disc2);
-        Disciplina disc3 = new Disciplina("Arquitetura de PC");
+        Disciplina disc3 = new Disciplina("Arquitetura de PC"); /* id 2 */
         se.CadastrarDisciplina(disc3);
+        Disciplina disc4 = new Disciplina("Programação"); /* id 3 */
+        se.CadastrarDisciplina(disc4);
 
         Aluno aluno1 = new Aluno("Livia", 40029);
         se.CadastrarAluno(aluno1);
         Aluno aluno2 = new Aluno("Ryan", 45885);
         se.CadastrarAluno(aluno2);
-        Aluno aluno3 = new Aluno("Outra pessoa", 7896);
+        Aluno aluno3 = new Aluno("Juliano", 7896);
         se.CadastrarAluno(aluno3);
 
         Professor prof1 = new Professor("Jorgiano");
@@ -40,8 +42,15 @@ public class Principal {
         se.CadastrarProfessor(prof2);
         Professor prof3 = new Professor("Bráulio");
         se.CadastrarProfessor(prof3);
+        Professor prof4 = new Professor("Joseph");
+        se.CadastrarProfessor(prof4);
 
+        se.CadastrarProfessorDisciplina(3, 3);
         se.CadastrarAlunoDisciplina(7896,2);
+        se.CadastrarAlunoDisciplina(45885, 2);
+        se.CadastrarAlunoDisciplina(45885, 3);
+        se.CadastrarAlunoDisciplina(40029, 3);
+        se.CadastrarAlunoDisciplina(7896, 3);
 
     
     }

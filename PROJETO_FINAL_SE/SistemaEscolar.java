@@ -126,15 +126,13 @@ public class SistemaEscolar{
 
 
     public void AtribuirNotaAluno(int id_aluno, int disciplina, int nota01, int nota02) {
+        try {
+        
         Aluno aluno = ListaAlunos.get(id_aluno);
         int indexa = findAluno(aluno.getMatriculaAluno());
-
-        if (indexa != -1 && disciplina < aluno.getBotelim().size()) {
             Notas disciplinaAtual = ListaAlunos.get(indexa).getBotelim().get(disciplina);
             disciplinaAtual.setNota1(nota01);
             disciplinaAtual.setNota2(nota02);
-
-            System.out.println(disciplinaAtual.getNota1() + " " + disciplinaAtual.getNota2());
 
             if (disciplinaAtual.aprovado()) {
                 System.out.println("Aluno aprovado");
@@ -151,8 +149,9 @@ public class SistemaEscolar{
                     System.out.println("Aluno reprovado");
                 }
             }
-        } else {
-            System.out.println("Aluno ou disciplina inválida");
+            
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Indices inválidos ou matrícula inválida");
         }
     }
 
@@ -212,6 +211,7 @@ public class SistemaEscolar{
     }
     
     public void RemoverProfessorDisciplina (int idDisciplina){
+        try{    
             Disciplina encontrado  = ListaDisciplinas.get(idDisciplina);
 
             if(encontrado.getProfessor() != null){
@@ -231,6 +231,9 @@ public class SistemaEscolar{
                 System.out.println("Não há professor cadastrado na disciplina: " + encontrado.getNomeDisciplina()); 
                 
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Indice da disciplina inválido.");
+        }
     }
 
 
@@ -269,16 +272,6 @@ public class SistemaEscolar{
        }
     }
 
-    public void DeletarDisciplina(Disciplina disciplina){
-        int cadastrado = findDisciplina(disciplina.getNomeDisciplina());
-        if(cadastrado != -1){
-            this.ListaDisciplinas.remove(ListaDisciplinas.get(cadastrado));
-            System.out.println("\nDisciplina deletada com sucesso!");
-        }else{
-            System.out.println("\nDisciplina não existe!");
-        }
-    }
-
     public void ListarDisciplinas() {
         for (int x = 0; x < this.ListaDisciplinas.size(); x++) {
             Disciplina disc = ListaDisciplinas.get(x);
@@ -296,6 +289,7 @@ public class SistemaEscolar{
 
     }
     public void ListarDisciplinasAluno(int id_aluno) {
+        try {
         Aluno aluno = this.ListaAlunos.get(id_aluno);
         for (int x = 0; x < aluno.getBotelim().size(); x++) {
             Notas notas = aluno.getBotelim().get(x);
@@ -316,7 +310,8 @@ public class SistemaEscolar{
             }
 
         }
-
+    } catch (IndexOutOfBoundsException e) {
+            System.out.println("Indice do aluno inválido.");
     }
-
+    }
 }

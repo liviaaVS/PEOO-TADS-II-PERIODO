@@ -46,11 +46,11 @@ public class Notas {
         this.nota2 = nota2;
     }
     public boolean aprovadoFinal() {
-        return getMediaFinal() > 60.0;
+        return getMediaFinal() >= 60;
     }
     
     public boolean aprovado() {
-        return  getMediaSimples() > 60.0;
+        return  getMediaSimples() >= 60;
     }
     
      public int getNotaFinal(){
