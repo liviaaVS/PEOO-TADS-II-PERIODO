@@ -43,35 +43,93 @@ Este é o projeto final desenvolvido na disciplina de Programação Estruturada 
 ## Diagrama de Classes.
 
 
+```mermaid
+
 classDiagram
-  class Quarto {
-    -numero: int
-    -capacidade: int
-    -precoBase: double
-    +calcularCusto(): double
-    +obterInformacoes(): String
+    SistemaEscolar -- Aluno
+    SistemaEscolar -- Professor
+    SistemaEscolar -- Disciplina
+    SistemaEscolar -- Notas
+  class Aluno {
+    -nome: String
+    -matricula: int
+    -boletim: Arraylist<Notas>
+    +getMatriculaAluno(): int
+    +getNomeAluno(): String
+    +getBotelim(): ArrayList<Notas> 
+    +setBoletim(): void
+    +ListarDisciplinas(): void
+  }
+  class Disciplina {
+    -nomeDisciplina: String
+    -ListaAlunos: ArrayList<Aluno>
+    -Prof: Professor
+    +getNomeDisciplina(): String
+    +getNomeProfessor(): String
+    +getListaAlunos(): ArrayList<Aluno>
+    +inserirProfessor(): boolean
+    +removerPofessor(): boolean
+    +inserirAluno(): boolean
+    +removerAluno(): boolean
+  }
+  class Notas {
+    -disciplina: String
+    -nomeAluno: String
+    -nota1: int
+    -nota2: int
+    -notaFinal: int
+    +getMediaSImples() int
+    +getMediaFinal() int
+    +getNomeAluno() String
+    +getDisciplina() String
+    +getNota1() int
+    +setNOta1() void
+    +getNota2() int
+    +setNOta2() void
+    +aprovadoFinal() boolean
+    +aprovado() boolean
+    +getNotaFinal() int
+    +setNotaFinal() boolean
+  }
+    class Professor{
+    -nome: String
+    -disciplina: Disciplina
+    -id: int
+    +removerDisciplina(): void
+    +getNomeProf(): String
+    +setId() void
+    +getId(): int
+    +getDisciplina(): Disciplina
+    +getDisciplinaNome(): String
+    +setDisciplina(): void
+  }
+  class SistemaEscolar{
+    -ListaAlunos: List<Aluno>
+    -ListaDisciplinas: List<Disciplina>
+    -ListaProfessores: List<Professor>
+    +MatricularAluno() boolean
+    +AtribuirNota() boolean
+    +AtribuirNotaAluno() void
+    +GerarBoletim() void
+    +findAluno() int
+    +findDisciplinaAluno() int
+    +findProfessor() int
+    +CadastrarAlunoDisciplina() void
+    +CadastrarAluno() void
+    +findProfessor() int
+    +CadastrarProfessor() boolean
+    +CadastrarProfessorDisciplina() void
+    +RemoverProfessorDisciplina() void
+    +findDisciplina() int
+    +CadastrarDisciplina() void
+    +ListarAlunos() void
+    +ListarProfessores() void
+    +ListarDisciplinas() void
+    +ListarDisciplinasAluno() void
+    +getListadeAlunos() list<Aluno>
   }
 
-  class QuartoSimples {
-    +calcularCusto(): double
-    +obterInformacoes(): String
-  }
-
-  class QuartoLuxo {
-    +jacuzzi: boolean
-    +calcularCusto(): double
-    +obterInformacoes(): String
-  }
-
-  class SuitePresidencial {
-    +salaReuniao: boolean
-    +calcularCusto(): double
-    +obterInformacoes(): String
-  }
-
-  Quarto <|-- QuartoSimples
-  Quarto <|-- QuartoLuxo
-  Quarto <|-- SuitePresidencial
+```
 
 
 ## Utilização.
