@@ -2,6 +2,9 @@
 
 Este é o projeto final desenvolvido na disciplina de Programação Estruturada Orientada a Objetos (PEOO), denominado Sistema Escolar. O sistema foi elaborado para gerenciar informações relacionadas a alunos, professores, disciplinas e notas em um ambiente escolar.
 
+Aluna: Livia Vitória da Silva.
+Aluno: Ryan Pinheiro Alves.
+
 ## Estrutura do Projeto
 
 ### Classes
