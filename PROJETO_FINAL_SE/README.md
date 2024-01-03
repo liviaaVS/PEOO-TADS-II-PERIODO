@@ -8,6 +8,25 @@ Aluno: Ryan Pinheiro Alves.
 ## Estrutura do Projeto
 
 ### Classes
+
+#### 1. Aluno
+A classe representa um aluno e inclui atributos como nome, matrícula e boletim (lista de notas). Métodos estão disponíveis para acessar e manipular essas informações, como obter a matrícula, nome, boletim, listar disciplinas, etc.
+
+#### 2. Disciplina
+Esta classe representa uma disciplina, com atributos como nome, lista de alunos matriculados e professor responsável. Métodos estão implementados para inserir e remover professores e alunos, além de obter informações sobre a disciplina.
+
+#### 3. Notas
+A classe Notas gerencia as notas de um aluno em uma disciplina específica. Possui métodos para calcular médias, verificar aprovação e acessar as informações relacionadas às notas.
+
+#### 4. Professor
+A classe Professor representa um professor, com atributos como nome, disciplina associada e ID. Métodos estão disponíveis para gerenciar a associação do professor com uma disciplina.
+
+#### 5. SistemaEscolar
+A classe principal, responsável por gerenciar listas de alunos, disciplinas e professores. Oferece métodos para realizar diversas operações, como matricular aluno, atribuir notas, cadastrar disciplinas, professores, listar informações, entre outras.
+
+
+
+
 # Sistema Escolar - Funcionalidades Principais
 
 1. **Cadastrar Disciplina (Opção 1):**
